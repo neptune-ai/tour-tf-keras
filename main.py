@@ -77,6 +77,7 @@ model.summary(print_fn=lambda x: neptune.log_text('model_summary', x))
 model.fit(x_train, y_train,
           batch_size=parameters['batch_size'],
           epochs=parameters['n_epochs'],
+          validation_split=0.2,
           callbacks=[NeptuneMonitor()])
 
 # Log model weights
