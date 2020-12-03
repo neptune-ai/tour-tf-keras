@@ -18,7 +18,7 @@ parameters = {'dense_units': 64,
               'dropout': 0.2,
               'learning_rate': 0.05,
               'batch_size': 64,
-              'n_epochs': 10}
+              'n_epochs': 30}
 
 # Create experiment
 neptune.create_experiment(name='keras-training',
