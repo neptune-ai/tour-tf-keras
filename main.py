@@ -5,7 +5,7 @@ import neptune
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from neptunecontrib.api import log_chart, log_table
+from neptunecontrib.api import log_table
 from neptunecontrib.monitoring.keras import NeptuneMonitor
 from scikitplot.metrics import plot_roc, plot_precision_recall
 
@@ -53,7 +53,7 @@ for j, class_name in enumerate(class_names):
         plt.grid(False)
         plt.imshow(x_train[label_[0][i]], cmap=plt.cm.binary)
         plt.xlabel(class_names[j])
-    neptune.log_image('train data sample', plt.gcf())
+    neptune.log_image('train_data_sample', plt.gcf())
     plt.close('all')
 
 # Prepare model
@@ -98,9 +98,9 @@ log_table('predictions', df)
 # Log model performance visualizations
 fig, ax = plt.subplots()
 plot_roc(y_test, y_pred_proba, ax=ax)
-log_chart('ROC', fig)
+neptune.log_image('model-performance-visualizations', fig, image_name='ROC')
 
 fig, ax = plt.subplots()
 plot_precision_recall(y_test, y_pred_proba, ax=ax)
-log_chart('precision recall', fig)
+neptune.log_image('model-performance-visualizations', fig, image_name='precision recall')
 plt.close('all')
