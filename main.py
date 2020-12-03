@@ -5,7 +5,7 @@ import neptune
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from neptunecontrib.api import log_table
+from neptunecontrib.api import log_chart, log_table
 from neptunecontrib.monitoring.keras import NeptuneMonitor
 from scikitplot.metrics import plot_roc, plot_precision_recall
 
@@ -15,9 +15,9 @@ neptune.init('neptune-ai/tour-with-tf-keras')
 # Prepare params
 parameters = {'dense_units': 32,
               'activation': 'relu',
-              'dropout': 0.3,
+              'dropout': 0.2,
               'learning_rate': 0.05,
-              'batch_size': 32,
+              'batch_size': 64,
               'n_epochs': 30}
 
 # Create experiment
@@ -53,7 +53,7 @@ for j, class_name in enumerate(class_names):
         plt.grid(False)
         plt.imshow(x_train[label_[0][i]], cmap=plt.cm.binary)
         plt.xlabel(class_names[j])
-    neptune.log_image('train_data_sample', plt.gcf())
+    neptune.log_image('train data sample', plt.gcf())
     plt.close('all')
 
 # Prepare model
@@ -98,9 +98,9 @@ log_table('predictions', df)
 # Log model performance visualizations
 fig, ax = plt.subplots()
 plot_roc(y_test, y_pred_proba, ax=ax)
-neptune.log_image('model-performance-visualizations', fig, image_name='ROC')
+log_chart('ROC', fig)
 
 fig, ax = plt.subplots()
 plot_precision_recall(y_test, y_pred_proba, ax=ax)
-neptune.log_image('model-performance-visualizations', fig, image_name='precision recall')
+log_chart('precision recall', fig)
 plt.close('all')
