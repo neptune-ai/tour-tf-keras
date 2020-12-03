@@ -10,15 +10,14 @@ from neptunecontrib.monitoring.keras import NeptuneMonitor
 from scikitplot.metrics import plot_roc, plot_precision_recall
 
 # Select project
-neptune.init('neptune-ai/tour-with-tf-keras',
-             api_token='ANONYMOUS')
+neptune.init('neptune-ai/tour-with-tf-keras')
 
 # Prepare params
-parameters = {'dense_units': 64,
+parameters = {'dense_units': 32,
               'activation': 'relu',
-              'dropout': 0.2,
+              'dropout': 0.3,
               'learning_rate': 0.05,
-              'batch_size': 64,
+              'batch_size': 32,
               'n_epochs': 30}
 
 # Create experiment
