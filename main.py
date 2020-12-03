@@ -10,7 +10,8 @@ from neptunecontrib.monitoring.keras import NeptuneMonitor
 from scikitplot.metrics import plot_roc, plot_precision_recall
 
 # Select project
-neptune.init('neptune-ai/tour-with-tf-keras')
+neptune.init('neptune-ai/tour-with-tf-keras',
+             api_token='ANONYMOUS')
 
 # Prepare params
 parameters = {'dense_units': 64,
